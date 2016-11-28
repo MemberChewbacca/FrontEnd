@@ -71,4 +71,20 @@ class Menu extends CI_Model {
 		$result = $this->rest->get('/maintenance/item/id/' . $key);
 		return ! empty($result);
 	}
+        
+        // Update a record in the DB
+        function update($record)
+        {
+                $this->rest->initialize(array('server' => REST_SERVER));
+                $this->rest->option(CURLOPT_PORT, REST_PORT);
+                $retrieved = $this->rest->put('/maintenance/item/id/' . $record['code'], $record);
+        }
+        
+        // Add a record to the DB
+        function add($record)
+        {
+                $this->rest->initialize(array('server' => REST_SERVER));
+                $this->rest->option(CURLOPT_PORT, REST_PORT);
+                $retrieved = $this->rest->post('/maintenance/item/id/' . $record['code'], $record);
+        }
 }
